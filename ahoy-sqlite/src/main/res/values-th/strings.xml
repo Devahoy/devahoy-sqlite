@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AhoySQLite</string>
+
+
+
+    <string name="friend_first_name">ชื่อ</string>
+    <string name="friend_last_name">นามสกุล</string>
+    <string name="friend_tel">Tel</string>
+    <string name="friend_email">อีเมล์</string>
+    <string name="friend_description">รายละเอียด</string>
+
+    <string name="action_delete">ลบ</string>
+    <string name="action_edit">แก้ไข</string>
+    <string name="action_add">เพิ่ม</string>
+
+    <string name="alert_title">ต้องการลบเพื่อนคนนี้ใช่หรือไม่?</string>
+    <string name="alert_message">ยืนยันการลบเพื่อนคนนี้?</string>
+
+    <string name="add_data_title">เพิ่มเพื่อนของคุณ?</string>
+    <string name="add_data_message">ยืนยันการเพิ่มเพื่อนคนนี้?</string>
+
+</resources>
+

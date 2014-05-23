@@ -45,12 +45,12 @@ public class AddFriendActivity extends Activity {
         Bundle bundle = getIntent().getExtras();
 
         if (bundle != null) {
-            ID = bundle.getInt(Friend.KEY_ID);
-            String firstName = bundle.getString(Friend.KEY_FIRST_NAME);
-            String lastName = bundle.getString(Friend.KEY_LAST_NAME);
-            String tel = bundle.getString(Friend.KEY_TEL);
-            String email = bundle.getString(Friend.KEY_EMAIL);
-            String description = bundle.getString(Friend.KEY_DESCRIPTION);
+            ID = bundle.getInt(Friend.Column.ID);
+            String firstName = bundle.getString(Friend.Column.FIRST_NAME);
+            String lastName = bundle.getString(Friend.Column.LAST_NAME);
+            String tel = bundle.getString(Friend.Column.TEL);
+            String email = bundle.getString(Friend.Column.EMAIL);
+            String description = bundle.getString(Friend.Column.DESCRIPTION);
 
             mFirstName.setText(firstName);
             mLastName.setText(lastName);

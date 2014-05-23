@@ -41,7 +41,7 @@ public class DetailActivity extends Activity {
         Bundle bundle  = getIntent().getExtras();
 
         if (bundle != null) {
-            id = bundle.getString(Friend.KEY_ID);
+            id = bundle.getString(Friend.Column.ID);
         }
 
         setContentView(R.layout.acitivity_detail);
@@ -88,19 +88,19 @@ public class DetailActivity extends Activity {
                 Intent updateIntent = new Intent(DetailActivity.this,
                         AddFriendActivity.class);
 
-                updateIntent.putExtra(Friend.KEY_ID, mFriend.getId());
-                updateIntent.putExtra(Friend.KEY_FIRST_NAME, mFriend.getFirstName());
-                updateIntent.putExtra(Friend.KEY_LAST_NAME, mFriend.getLastName());
-                updateIntent.putExtra(Friend.KEY_TEL, mFriend.getTel());
-                updateIntent.putExtra(Friend.KEY_EMAIL, mFriend.getEmail());
-                updateIntent.putExtra(Friend.KEY_DESCRIPTION, mFriend.getDescription());
+                updateIntent.putExtra(Friend.Column.ID, mFriend.getId());
+                updateIntent.putExtra(Friend.Column.FIRST_NAME, mFriend.getFirstName());
+                updateIntent.putExtra(Friend.Column.LAST_NAME, mFriend.getLastName());
+                updateIntent.putExtra(Friend.Column.TEL, mFriend.getTel());
+                updateIntent.putExtra(Friend.Column.EMAIL, mFriend.getEmail());
+                updateIntent.putExtra(Friend.Column.DESCRIPTION, mFriend.getDescription());
 
                 startActivity(updateIntent);
                 overridePendingTransition(android.R.anim.fade_in,
                         android.R.anim.fade_out);
             }
         });
-
+        initialData();
 
     }
 
@@ -112,7 +112,6 @@ public class DetailActivity extends Activity {
 
     private void initialData() {
         mFriend = mHelper.getFriend(id);
-
         mFirstName.setText(mFriend.getFirstName());
         mLastName.setText(mFriend.getLastName());
         mTel.setText(mFriend.getTel());

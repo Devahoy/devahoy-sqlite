@@ -17,36 +17,25 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private final String TAG = getClass().getSimpleName();
 
-    //Database
-    private static final String DATABASE_NAME = "devahoy_friends.db";
-    private static final int DATABASE_VERSION = 1;
-
-    //Table & Column
-    public static final String TABLE_NAME = "friend";
-    public static final String COL_ID = "_id";
-    public static final String COL_FIRSTNAME = "first_name";
-    public static final String COL_LASTNAME = "last_name";
-    public static final String COL_TEL = "tel";
-    public static final String COL_EMAIL = "email";
-    public static final String COL_DESCRIPTION = "description";
-
     private SQLiteDatabase sqLiteDatabase;
 
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, Friend.DATABASE_NAME, null, Friend.DATABASE_VERSION);
     }
 
 
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String CREATE_FRIEND_TABLE = "CREATE TABLE " + TABLE_NAME + " ( " +
-                COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COL_FIRSTNAME + " TEXT, " +
-                COL_LASTNAME + " TEXT, " +
-                COL_TEL + " TEXT, " +
-                COL_EMAIL + " TEXT, " +
-                COL_DESCRIPTION + " TEXT )";
+        String CREATE_FRIEND_TABLE = String.format("CREATE TABLE %s " +
+                "(%s INTEGER PRIMARY KEY  AUTOINCREMENT, %s TEXT, %s TEXT, %s TEXT, %s TEXT, %s TEXT)",
+                Friend.TABLE,
+                Friend.Column.ID,
+                Friend.Column.FIRST_NAME,
+                Friend.Column.LAST_NAME,
+                Friend.Column.TEL,
+                Friend.Column.EMAIL,
+                Friend.Column.DESCRIPTION);
 
         Log.i(TAG, CREATE_FRIEND_TABLE);
 
@@ -57,7 +46,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        String DROP_FRIEND_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
+        String DROP_FRIEND_TABLE = "DROP TABLE IF EXISTS " + Friend.TABLE;
 
         db.execSQL(DROP_FRIEND_TABLE);
 
@@ -75,14 +64,14 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-//        values.put(COL_ID, friend.getId());
-        values.put(COL_FIRSTNAME, friend.getFirstName());
-        values.put(COL_LASTNAME, friend.getLastName());
-        values.put(COL_TEL, friend.getTel());
-        values.put(COL_EMAIL, friend.getEmail());
-        values.put(COL_DESCRIPTION, friend.getDescription());
+//        values.put(Friend.Column.ID, friend.getId());
+        values.put(Friend.Column.FIRST_NAME, friend.getFirstName());
+        values.put(Friend.Column.LAST_NAME, friend.getLastName());
+        values.put(Friend.Column.TEL, friend.getTel());
+        values.put(Friend.Column.EMAIL, friend.getEmail());
+        values.put(Friend.Column.DESCRIPTION, friend.getDescription());
 
-        sqLiteDatabase.insert(TABLE_NAME, null, values);
+        sqLiteDatabase.insert(Friend.TABLE, null, values);
 
         sqLiteDatabase.close();
     }
@@ -92,9 +81,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
         sqLiteDatabase = this.getReadableDatabase();
 
-        Cursor cursor = sqLiteDatabase.query( TABLE_NAME,
+        Cursor cursor = sqLiteDatabase.query( Friend.TABLE,
                 null,
-                COL_ID + " = ? ",
+                Friend.Column.ID + " = ? ",
                 new String[] { id },
                 null,
                 null,
@@ -118,13 +107,12 @@ public class DBHelper extends SQLiteOpenHelper {
         return friend;
     }
     public List<String> getFriendList() {
-        String QUERY_ALL_FRIEND = "SELECT * FROM " + TABLE_NAME;
-
         List<String> friends = new ArrayList<String>();
 
         sqLiteDatabase = this.getWritableDatabase();
 
-        Cursor cursor = sqLiteDatabase.rawQuery(QUERY_ALL_FRIEND, null);
+        Cursor cursor = sqLiteDatabase.query
+                (Friend.TABLE, null, null, null, null, null, null);
 
         if (cursor != null) {
             cursor.moveToFirst();
@@ -150,7 +138,7 @@ public class DBHelper extends SQLiteOpenHelper {
      */
     public List<Friend> getAllFriend() {
 
-        String QUERY_ALL_FRIEND = "SELECT * FROM " + TABLE_NAME;
+        String QUERY_ALL_FRIEND = "SELECT * FROM " + Friend.TABLE;
 
         List<Friend> friends = new ArrayList<Friend>();
 
@@ -182,25 +170,23 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     //UPDATE
-    public int updateFriend(Friend friend) {
+    public void updateFriend(Friend friend) {
 
         sqLiteDatabase  = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COL_ID, friend.getId());
-        values.put(COL_FIRSTNAME, friend.getFirstName());
-        values.put(COL_LASTNAME, friend.getLastName());
-        values.put(COL_EMAIL, friend.getEmail());
-        values.put(COL_DESCRIPTION, friend.getDescription());
+        values.put(Friend.Column.ID, friend.getId());
+        values.put(Friend.Column.FIRST_NAME, friend.getFirstName());
+        values.put(Friend.Column.LAST_NAME, friend.getLastName());
+        values.put(Friend.Column.EMAIL, friend.getEmail());
+        values.put(Friend.Column.DESCRIPTION, friend.getDescription());
 
-        int row = sqLiteDatabase.update(TABLE_NAME,
+        int row = sqLiteDatabase.update(Friend.TABLE,
                 values,
-                COL_ID + " = ? ",
+                Friend.Column.ID + " = ? ",
                 new String[] { String.valueOf(friend.getId()) });
 
         sqLiteDatabase.close();
-
-        return row;
     }
 
     //DELETE
@@ -208,9 +194,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
         sqLiteDatabase = this.getWritableDatabase();
 
-/*        sqLiteDatabase.delete(TABLE_NAME, COL_ID + " = ? ",
+/*        sqLiteDatabase.delete(Friend.TABLE, Friend.Column.ID + " = ? ",
                 new String[] { String.valueOf(friend.getId()) });*/
-        sqLiteDatabase.delete(TABLE_NAME, COL_ID + " = " + id, null);
+        sqLiteDatabase.delete(Friend.TABLE, Friend.Column.ID + " = " + id, null);
 
         sqLiteDatabase.close();
     }

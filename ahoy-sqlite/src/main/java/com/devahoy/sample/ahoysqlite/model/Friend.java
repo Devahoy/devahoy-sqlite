@@ -1,13 +1,22 @@
 package com.devahoy.sample.ahoysqlite.model;
 
+import android.provider.BaseColumns;
+
 public class Friend {
 
-    public static final String KEY_ID = "id";
-    public static final String KEY_FIRST_NAME = "firstName";
-    public static final String KEY_LAST_NAME = "lastName";
-    public static final String KEY_TEL = "tel";
-    public static final String KEY_EMAIL = "email";
-    public static final String KEY_DESCRIPTION = "description";
+    //Database
+    public static final String DATABASE_NAME = "devahoy_friends.db";
+    public static final int DATABASE_VERSION = 1;
+    public static final String TABLE = "friend";
+
+    public class Column {
+        public static final String ID = BaseColumns._ID;
+        public static final String FIRST_NAME = "firstName";
+        public static final String LAST_NAME = "lastName";
+        public static final String TEL = "tel";
+        public static final String EMAIL = "email";
+        public static final String DESCRIPTION = "description";
+    }
 
     private int id;
     private String firstName;

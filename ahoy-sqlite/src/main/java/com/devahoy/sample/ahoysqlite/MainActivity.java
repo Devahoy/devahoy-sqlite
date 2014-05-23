@@ -35,7 +35,7 @@ public class MainActivity extends ListActivity {
         adapter.notifyDataSetChanged();
 
 
-//        queryFriendList();
+        queryFriendList();
 
 
     }
@@ -48,7 +48,6 @@ public class MainActivity extends ListActivity {
                     "john@doe.com", "blah blah");
             mHelper.addFriend(friend);
         }
-
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, friends);
@@ -73,7 +72,7 @@ public class MainActivity extends ListActivity {
         int index = listName.indexOf(" ");
         String columnId = listName.substring(0, index);
 
-        detail.putExtra(Friend.KEY_ID, columnId);
+        detail.putExtra(Friend.Column.ID, columnId);
         startActivity(detail);
         overridePendingTransition(android.R.anim.fade_in,
                 android.R.anim.fade_out);

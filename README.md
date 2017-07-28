@@ -2,8 +2,8 @@
 
 Article Link 
 
-- [การใช้งาน Android SQLite ตอนที่ 1](http://devahoy.com/2014/05/android-sqlite-tutorial-part-1/)
-- [การใช้งาน Android SQLite ตอนที่ 2](http://devahoy.com/2014/05/android-sqlite-tutorial-part-2/)
+- [การใช้งาน Android SQLite ตอนที่ 1](https://devahoy.com/posts/android-sqlite-tutorial-part-1/)
+- [การใช้งาน Android SQLite ตอนที่ 2](https://devahoy.com/posts/android-sqlite-tutorial-part-2/)
 
 
 ## Usage
